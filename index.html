@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Boas-Vindas - VIP Hotel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #000000 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .glow {
+            box-shadow: 0 0 30px rgba(6, 182, 212, 0.2), 0 0 60px rgba(0, 0, 0, 0.8);
+        }
+        
+        .digital-clock {
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .restaurant-button {
+            animation: attention 2s infinite;
+            box-shadow: 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 69, 0, 0.4);
+        }
+        
+        @keyframes attention {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 69, 0, 0.4);
+            }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 0 0 60px rgba(255, 165, 0, 0.8), 0 0 120px rgba(255, 69, 0, 0.6);
+            }
+        }
+        
+        .restaurant-button:hover {
+            animation: none;
+            transform: scale(1.1) !important;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full">
+        <!-- Header -->
+        <div class="text-center mb-8 slide-in">
+            <div class="glow">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhnlAw0dwznrjFv2tZeaxgl_3Ywn-5XvpWR9ljvB3gFuOvd8usdy0iKvzkr1Zt5Y1t8Rne3EIAgyjvYFdSrHj5pWVSBYkd806OgfFlF_fV6z6a3K2j_MBOz5tzMExBtuA1wGe0mqZq8czv8TTpkVfBk9MK8l1KSnlpiUG9zj--h_cbp-WzKp5vukPPZyxF9" alt="Logo do Hotel" class="mx-auto h-32 w-auto mb-4" onerror="this.src=''; this.alt='Logo não pôde ser carregada'; this.style.display='none';">
+            </div>
+            <p class="text-xl text-white/90 font-light mb-4">Seja bem-vindo(a)!</p>
+            
+            <!-- Link Restaurante -->
+            <a href="https://zerotofamesites.github.io/cardapioinv-/" target="_blank" class="restaurant-button inline-flex items-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-bold px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 glow animate-bounce">
+                <span class="text-3xl mr-3 animate-pulse">🍽️</span>
+                <span class="text-lg">RESTAURANTE - Ver Cardápio</span>
+                <span class="ml-3 text-2xl animate-ping">✨</span>
+            </a>
+        </div>
+
+        <!-- Main Panel -->
+        <div class="glass-effect rounded-3xl p-8 slide-in glow">
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Café da Manhã -->
+                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4">☕</div>
+                        <h2 class="text-2xl font-semibold text-white">Café da Manhã</h2>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center text-white/90">
+                            <div class="w-3 h-3 bg-green-400 rounded-full mr-3 pulse-animation"></div>
+                            <span class="font-medium">Segunda a Sexta:</span>
+                            <span class="ml-2 text-cyan-400 font-semibold">06:00 - 09:00</span>
+                        </div>
+                        
+                        <div class="flex items-center text-white/90">
+                            <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3 pulse-animation"></div>
+                            <span class="font-medium">Sáb, Dom e Feriados:</span>
+                            <span class="ml-2 text-cyan-400 font-semibold">06:00 - 10:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WiFi -->
+                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4">📶</div>
+                        <h2 class="text-2xl font-semibold text-white">WiFi Gratuito</h2>
+                    </div>
+                    
+                    <div class="bg-gray-900/80 rounded-lg p-4 border border-gray-600/30">
+                        <div class="text-gray-300 text-sm mb-1">Rede:</div>
+                        <div class="text-white font-mono text-lg mb-3">VIP Hotel WiFi</div>
+                        
+                        <div class="text-gray-300 text-sm mb-1">Senha:</div>
+                        <div class="flex items-center justify-between bg-gray-800/60 rounded-lg p-3 border border-gray-600/20">
+                            <span class="text-cyan-400 font-mono text-xl font-bold">viphotel</span>
+                            <button onclick="copyWifi()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1 rounded-lg text-sm transition-colors shadow-lg">
+                                📋 Copiar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recepção -->
+                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4">📞</div>
+                        <h2 class="text-2xl font-semibold text-white">Recepção</h2>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="text-white/70 text-sm mb-2">Ligue para o ramal:</div>
+                        <div class="text-4xl font-bold text-cyan-400 mb-3">200</div>
+                        <div class="text-white/60 text-sm">Atendimento 24 horas</div>
+                    </div>
+                </div>
+
+                <!-- Informações Extras -->
+                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4">ℹ️</div>
+                        <h2 class="text-2xl font-semibold text-white">Serviços</h2>
+                    </div>
+                    
+                    <div class="space-y-2 text-white/80">
+                        <div class="flex items-center">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Frigobar</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Chuveiro elétrico</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>TV a cabo</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Acesso à internet</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Ar-condicionado</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span>Café da manhã incluso</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regras Importantes -->
+                <div class="bg-red-900/40 rounded-2xl p-6 border border-red-700/50 shadow-2xl md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <div class="text-4xl mr-4">⚠️</div>
+                        <h2 class="text-2xl font-semibold text-white">Regras Importantes</h2>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <!-- Proibido Fumar -->
+                        <div class="bg-red-800/30 rounded-lg p-4 border border-red-600/30">
+                            <div class="flex items-center mb-2">
+                                <span class="text-red-400 mr-2 text-xl">🚭</span>
+                                <h3 class="text-lg font-semibold text-white">PROIBIDO FUMAR NOS QUARTOS</h3>
+                            </div>
+                            <p class="text-red-200 text-sm leading-relaxed">
+                                Conforme Lei Federal nº 12.546/2011 e Lei Estadual, é <strong>PROIBIDO FUMAR</strong> em ambientes fechados de uso coletivo. 
+                                O descumprimento desta norma sujeita o infrator às penalidades previstas em lei.
+                            </p>
+                        </div>
+
+                        <!-- Cuidado com Toalhas -->
+                        <div class="bg-yellow-800/30 rounded-lg p-4 border border-yellow-600/30">
+                            <div class="flex items-center mb-2">
+                                <span class="text-yellow-400 mr-2 text-xl">🧻</span>
+                                <h3 class="text-lg font-semibold text-white">CUIDADO COM AS TOALHAS</h3>
+                            </div>
+                            <p class="text-yellow-200 text-sm leading-relaxed">
+                                É <strong>PROIBIDO</strong> limpar nas toalhas qualquer tipo de substância que possa manchá-las 
+                                (maquiagem, tinta, graxa, etc.). O dano às toalhas está <strong>SUJEITO À MULTA</strong> 
+                                conforme valor de reposição do item.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center mt-8 pt-6 border-t border-white/20">
+                <p class="text-white/70 text-lg">
+                    Tenha uma excelente estadia! 🌟
+                </p>
+                <p class="text-white/50 text-sm mt-2">
+                    Para qualquer dúvida, nossa equipe está sempre à disposição.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        // Função para copiar senha do WiFi
+        function copyWifi() {
+            navigator.clipboard.writeText('viphotel').then(() => {
+                // Feedback visual
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '✓ Copiado!';
+                button.classList.add('bg-green-500');
+                button.classList.remove('bg-cyan-600');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('bg-green-500');
+                    button.classList.add('bg-cyan-600');
+                }, 2000);
+            });
+        }
+
+
+
+        // Animação de entrada escalonada
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.slide-in');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97d19bace014f632',t:'MTc1NzUzNTQzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
