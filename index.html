@@ -1,273 +1,800 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE html>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Boas-Vindas - VIP Hotel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title><data:blog.pageTitle/></title>
+    <b:include data='blog' name='all-head-content'/>
+    
+    <style type='text/css'>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: #000000;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+            --shadow-dark: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
         
-        .gradient-bg {
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #000000 100%);
+        /* Black Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #000000;
         }
         
-        .glass-effect {
-            background: rgba(0, 0, 0, 0.8);
+        /* Glass Morphism Container */
+        .glass-container {
+            background: var(--glass-bg);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
         }
         
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        /* Modern Card Design */
+        .modern-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-dark);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .modern-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 24px 24px 0 0;
         }
         
-        .slide-in {
-            animation: slideIn 0.8s ease-out;
+        .modern-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
         }
         
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        /* Gradient Buttons */
+        .gradient-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .gradient-btn:hover::before {
+            left: 100%;
+        }
+        
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Icon Containers */
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .icon-container.orange {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        }
+        
+        .icon-container.blue {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .icon-container.green {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+        }
+        
+        /* Typography */
+        .main-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+        }
+        
+        /* Alert Banner - Neon Red Effect */
+        .alert-banner {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 50%, #ff0000 100%);
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            border: 2px solid #ff0000;
+            box-shadow: 
+                0 0 20px rgba(255, 0, 0, 0.6),
+                0 0 40px rgba(255, 0, 0, 0.4),
+                0 0 60px rgba(255, 0, 0, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: neonPulse 2s infinite, glowPulse 3s infinite;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 
+                0 0 5px #ffffff,
+                0 0 10px #ffffff,
+                0 0 15px #ff0000,
+                0 0 20px #ff0000;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .alert-banner::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff0000, #ffffff, #ff0000, #ffffff);
+            border-radius: 18px;
+            z-index: -1;
+            animation: borderGlow 4s linear infinite;
+        }
+        
+        .alert-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes neonPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 
+                    0 0 20px rgba(255, 0, 0, 0.6),
+                    0 0 40px rgba(255, 0, 0, 0.4),
+                    0 0 60px rgba(255, 0, 0, 0.2),
+                    inset 0 0 20px rgba(255, 255, 255, 0.1);
             }
+            50% { 
+                transform: scale(1.05);
+                box-shadow: 
+                    0 0 30px rgba(255, 0, 0, 0.8),
+                    0 0 60px rgba(255, 0, 0, 0.6),
+                    0 0 90px rgba(255, 0, 0, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.2);
+            }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 5px #ffffff,
+                    0 0 10px #ffffff,
+                    0 0 15px #ff0000,
+                    0 0 20px #ff0000;
+            }
+            50% { 
+                text-shadow: 
+                    0 0 10px #ffffff,
+                    0 0 20px #ffffff,
+                    0 0 30px #ff0000,
+                    0 0 40px #ff0000,
+                    0 0 50px #ff0000;
+            }
+        }
+        
+        @keyframes borderGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .profiles-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            max-width: 800px;
+            margin: 3rem auto 0;
+            padding: 0 1rem;
+        }
+        
+        /* Profile Cards - Futuristic Design */
+        .profile-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(25px);
+            border: 2px solid transparent;
+            border-radius: 28px;
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff00, #ffff00);
+            border-radius: 28px;
+            padding: 2px;
+            z-index: -1;
+            animation: borderRotate 4s linear infinite;
+        }
+        
+        .profile-card::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+            border-radius: 26px;
+            z-index: -1;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 
+                0 35px 80px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 245, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .profile-card:hover::before {
+            animation-duration: 2s;
+        }
+        
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            margin: 0 auto 2rem;
+            display: block;
+            position: relative;
+            transition: all 0.6s ease;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            padding: 4px;
+        }
+        
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff00, #ffff00);
+            border-radius: 50%;
+            z-index: -1;
+            animation: imageGlow 3s ease-in-out infinite alternate;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        
+        .profile-card:hover .profile-image::before {
+            opacity: 1;
+        }
+        
+        .profile-card:hover .profile-image {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 
+                0 0 30px rgba(0, 245, 255, 0.6),
+                0 0 60px rgba(255, 0, 255, 0.4);
+        }
+        
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes imageGlow {
+            0% { 
+                box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+                transform: scale(1);
+            }
+            100% { 
+                box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
+                transform: scale(1.05);
+            }
+        }
+        
+        /* Futuristic Text Effects */
+        .profile-card h3 {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #00ff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        .profile-card p {
+            color: rgba(255, 255, 255, 0.9) !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 20px rgba(0, 245, 255, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(255, 0, 255, 0.8); }
+        }
+        
+        /* Futuristic Button Effects */
+        .profile-card .gradient-btn {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        .profile-card .gradient-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .profile-card .gradient-btn:hover::before {
+            left: 100%;
+        }
+        
+        .profile-card .gradient-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(0, 245, 255, 0.6);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+            transform: scale(0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .profiles-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .modern-card {
+                padding: 1.5rem;
+            }
+            
+            .profile-card {
+                padding: 2rem;
+            }
+            
+            .main-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Utility Classes */
+        .text-white { color: white; }
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mt-8 { margin-top: 2rem; }
+        .font-bold { font-weight: 700; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .opacity-90 { opacity: 0.9; }
+        
+
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        .glow {
-            box-shadow: 0 0 30px rgba(6, 182, 212, 0.2), 0 0 60px rgba(0, 0, 0, 0.8);
-        }
-        
-        .digital-clock {
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        
-        .restaurant-button {
-            animation: attention 2s infinite;
-            box-shadow: 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 69, 0, 0.4);
-        }
-        
-        @keyframes attention {
-            0%, 100% { 
-                transform: scale(1);
-                box-shadow: 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 69, 0, 0.4);
-            }
-            50% { 
-                transform: scale(1.05);
-                box-shadow: 0 0 60px rgba(255, 165, 0, 0.8), 0 0 120px rgba(255, 69, 0, 0.6);
-            }
-        }
-        
-        .restaurant-button:hover {
-            animation: none;
-            transform: scale(1.1) !important;
-        }
     </style>
 </head>
-<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-4xl w-full">
+
+<body>
+    <div class="bg-animation"></div>
+    
+    <div style="min-height: 100vh; padding: 2rem 0;">
         <!-- Header -->
-        <div class="text-center mb-8 slide-in">
-            <div class="glow">
-                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhnlAw0dwznrjFv2tZeaxgl_3Ywn-5XvpWR9ljvB3gFuOvd8usdy0iKvzkr1Zt5Y1t8Rne3EIAgyjvYFdSrHj5pWVSBYkd806OgfFlF_fV6z6a3K2j_MBOz5tzMExBtuA1wGe0mqZq8czv8TTpkVfBk9MK8l1KSnlpiUG9zj--h_cbp-WzKp5vukPPZyxF9" alt="Logo do Hotel" class="mx-auto h-32 w-auto mb-4" onerror="this.src=''; this.alt='Logo não pôde ser carregada'; this.style.display='none';">
+        <header style="text-align: center; margin-bottom: 3rem;" class="fade-in">
+            <div style="margin-bottom: 2rem;">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjrAj-gZ6d2n0R_eJ8FUThVuOPFOZPGQfVNYSAyk2RVDtn7h5qOoXfw3cF0RZQNffUdILrj_uF9t9OxPIJxTyO5SMMsv2JheWaCjEZejmQCGaTtNo5OIfG8kxTdq0vnQMHbAUzHuB-JC_xlRZH5YWQVrHhJjc6ejrc4JkfLICK2Z_191iqkn2rnPp3wfbo7" alt="Comfort Hotel Logo" style="width: 200px; height: 200px; object-fit: contain; margin: 0 auto; display: block;" onerror="this.style.display='none';">
             </div>
-            <p class="text-xl text-white/90 font-light mb-4">Seja bem-vindo(a)!</p>
-            
-            <!-- Link Restaurante -->
-            <a href="https://zerotofamesites.github.io/cardapioinv-/" target="_blank" class="restaurant-button inline-flex items-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white font-bold px-8 py-4 rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-110 glow animate-bounce">
-                <span class="text-3xl mr-3 animate-pulse">🍽️</span>
-                <span class="text-lg">RESTAURANTE - Ver Cardápio</span>
-                <span class="ml-3 text-2xl animate-ping">✨</span>
-            </a>
+            <h1 class="main-title">BOAS-VINDAS AO COMFORT HOTEL</h1>
+            <p class="subtitle">
+                Seja bem-vindo(a)! Preparamos todas as informações importantes para tornar sua estadia ainda mais confortável.
+            </p>
+        </header>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner fade-in" style="max-width: 1200px; margin: 0 auto 3rem; margin-left: 1rem; margin-right: 1rem;">
+            📋 LEIA COM ATENÇÃO AS INFORMAÇÕES ABAIXO
         </div>
 
-        <!-- Main Panel -->
-        <div class="glass-effect rounded-3xl p-8 slide-in glow">
-            <div class="grid md:grid-cols-2 gap-8">
+        <!-- Information Cards -->
+        <div class="grid">
+            <!-- Café da Manhã -->
+            <div class="modern-card fade-in">
+                <div class="icon-container orange">
+                    <svg width="40" height="40" fill="#ff6b35" viewBox="0 0 20 20">
+                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Café da Manhã</h3>
+                <div class="text-4xl font-bold mb-4" style="color: #ff6b35;">6h às 9h</div>
+                <p style="color: #666; margin-bottom: 1.5rem;">Desfrute do nosso delicioso café da manhã completo no restaurante principal</p>
+                <button onclick="showBreakfastDetails()" class="gradient-btn">
+                    Ver Detalhes
+                </button>
+            </div>
+
+            <!-- WiFi -->
+            <div class="modern-card fade-in">
+                <div class="icon-container blue">
+                    <svg width="40" height="40" fill="#4285f4" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">WiFi Gratuito</h3>
+                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem;">
+                    <p style="color: #666; margin-bottom: 0.5rem; font-size: 0.9rem;">Esta senha é geral para qualquer rede:</p>
+                    <div class="text-2xl font-bold" style="color: #4285f4;" id="wifiPassword">viphotel</div>
+                </div>
+                <button onclick="copyWifiPassword()" class="gradient-btn">
+                    📋 Copiar Senha
+                </button>
+            </div>
+
+            <!-- Recepção -->
+            <div class="modern-card fade-in">
+                <div class="icon-container green">
+                    <svg width="40" height="40" fill="#34a853" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Recepção</h3>
+                <div class="text-4xl font-bold mb-4" style="color: #34a853;">200</div>
+                <p style="color: #666; margin-bottom: 1.5rem;">Número do interfone para contato direto com a recepção</p>
+                <button onclick="callReception()" class="gradient-btn">
+                    📞 Ligar Agora
+                </button>
+            </div>
+        </div>
+
+        <!-- Profiles Section -->
+        <div class="profiles-grid">
+            <!-- Restaurant Profile -->
+            <div class="profile-card fade-in">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhtI8TskeLJv2S49G5NbBX_Q2-qmkJxU6mSkJLwoKCCe5qa6_HSm2n0XEvT0g11B7GUgXrs9iZ6feAlvrnFecAogM5L0P0nmTEPzrwUvJ3p8qKgtliQvWA1Ja6dUv68aV9TCNdgMoi_Qf_szWXgJQNjh-KfvjdAKN3KCF9OZEL7J84HE3YGn3wwJYzEHVuu" alt="Restaurante" class="profile-image" onerror="this.style.display='none';">
+                <h3 class="text-2xl font-bold text-white mb-4">Nosso Restaurante</h3>
+                <p class="text-white opacity-90 mb-6">
+                    Conheça nosso cardápio completo com pratos deliciosos preparados especialmente para você!
+                </p>
+                <button onclick="goToRestaurant()" class="gradient-btn" style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);">
+                    🍽️ RESTAURANTE
+                </button>
+            </div>
+
+            <!-- Urbano Norte Profile -->
+            <div class="profile-card fade-in">
+                <img src="https://urbanonortecidades.com.br/wp-content/uploads/2023/09/Group-16-25.png" alt="Urbano Norte" class="profile-image" onerror="this.style.display='none';">
+                <h3 class="text-2xl font-bold text-white mb-4">Urbano Norte</h3>
+                <p class="text-white opacity-90 mb-6">
+                    Somos uma empresa brasileira no mercado de transporte urbano de aplicativo. A mais de 5 anos, trazendo sempre qualidade conforto e segurança.
+                </p>
+                <button onclick="goToUrbanoNorte()" class="gradient-btn">
+                    🚗 URBANO NORTE
+                </button>
+            </div>
+        </div>
+
+        <!-- Rules Section -->
+        <div style="max-width: 1200px; margin: 4rem auto 0; padding: 0 1rem;">
+            <div class="modern-card fade-in" style="background: rgba(255, 255, 255, 0.98); border: 2px solid #ff6b35;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                    <h2 style="font-size: 2.5rem; font-weight: 800; color: #ff6b35; margin-bottom: 1rem;">Regras Importantes</h2>
+                </div>
                 
-                <!-- Café da Manhã -->
-                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
-                    <div class="flex items-center mb-4">
-                        <div class="text-4xl mr-4">☕</div>
-                        <h2 class="text-2xl font-semibold text-white">Café da Manhã</h2>
+                <div style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                    <!-- No Smoking Rule -->
+                    <div style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); padding: 2rem; border-radius: 20px; border-left: 6px solid #f44336; position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: rgba(244, 67, 54, 0.1); border-radius: 50%; animation: pulse 2s infinite;"></div>
+                        <div style="font-size: 4rem; margin-bottom: 1rem; text-align: center;">🚭</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #c62828; margin-bottom: 1rem; text-align: center;">PROIBIDO FUMAR NOS QUARTOS</h3>
+                        <p style="color: #424242; line-height: 1.6; font-size: 0.95rem; text-align: justify;">
+                            Conforme <strong>Lei Federal nº 12.546/2011</strong> e <strong>Lei Estadual</strong>, é <strong>PROIBIDO FUMAR</strong> em ambientes fechados de uso coletivo. O descumprimento desta norma sujeita o infrator às <strong>penalidades previstas em lei</strong>.
+                        </p>
                     </div>
                     
-                    <div class="space-y-3">
-                        <div class="flex items-center text-white/90">
-                            <div class="w-3 h-3 bg-green-400 rounded-full mr-3 pulse-animation"></div>
-                            <span class="font-medium">Segunda a Sexta:</span>
-                            <span class="ml-2 text-cyan-400 font-semibold">06:00 - 09:00</span>
-                        </div>
-                        
-                        <div class="flex items-center text-white/90">
-                            <div class="w-3 h-3 bg-cyan-400 rounded-full mr-3 pulse-animation"></div>
-                            <span class="font-medium">Sáb, Dom e Feriados:</span>
-                            <span class="ml-2 text-cyan-400 font-semibold">06:00 - 10:00</span>
-                        </div>
+                    <!-- Towel Care Rule -->
+                    <div style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); padding: 2rem; border-radius: 20px; border-left: 6px solid #4caf50; position: relative; overflow: hidden;">
+                        <div style="position: absolute; top: -10px; right: -10px; width: 60px; height: 60px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; animation: pulse 2s infinite;"></div>
+                        <div style="font-size: 4rem; margin-bottom: 1rem; text-align: center;">🧻</div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; color: #2e7d32; margin-bottom: 1rem; text-align: center;">CUIDADO COM AS TOALHAS</h3>
+                        <p style="color: #424242; line-height: 1.6; font-size: 0.95rem; text-align: justify;">
+                            É <strong>PROIBIDO</strong> limpar nas toalhas qualquer tipo de substância que possa manchá-las (maquiagem, tinta, graxa, etc.). O dano às toalhas está <strong>SUJEITO À MULTA</strong> conforme valor de reposição do item.
+                        </p>
                     </div>
                 </div>
-
-                <!-- WiFi -->
-                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
-                    <div class="flex items-center mb-4">
-                        <div class="text-4xl mr-4">📶</div>
-                        <h2 class="text-2xl font-semibold text-white">WiFi Gratuito</h2>
-                    </div>
-                    
-                    <div class="bg-gray-900/80 rounded-lg p-4 border border-gray-600/30">
-                        <div class="text-gray-300 text-sm mb-1">Rede:</div>
-                        <div class="text-white font-mono text-lg mb-3">VIP Hotel WiFi</div>
-                        
-                        <div class="text-gray-300 text-sm mb-1">Senha:</div>
-                        <div class="flex items-center justify-between bg-gray-800/60 rounded-lg p-3 border border-gray-600/20">
-                            <span class="text-cyan-400 font-mono text-xl font-bold">viphotel</span>
-                            <button onclick="copyWifi()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1 rounded-lg text-sm transition-colors shadow-lg">
-                                📋 Copiar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recepção -->
-                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
-                    <div class="flex items-center mb-4">
-                        <div class="text-4xl mr-4">📞</div>
-                        <h2 class="text-2xl font-semibold text-white">Recepção</h2>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="text-white/70 text-sm mb-2">Ligue para o ramal:</div>
-                        <div class="text-4xl font-bold text-cyan-400 mb-3">200</div>
-                        <div class="text-white/60 text-sm">Atendimento 24 horas</div>
-                    </div>
-                </div>
-
-                <!-- Informações Extras -->
-                <div class="bg-black/40 rounded-2xl p-6 border border-gray-700/50 shadow-2xl">
-                    <div class="flex items-center mb-4">
-                        <div class="text-4xl mr-4">ℹ️</div>
-                        <h2 class="text-2xl font-semibold text-white">Serviços</h2>
-                    </div>
-                    
-                    <div class="space-y-2 text-white/80">
-                        <div class="flex items-center">
-                            <span class="text-green-400 mr-2">✓</span>
-                            <span>Frigobar</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 mr-2">✓</span>
-                            <span>Chuveiro elétrico</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 mr-2">✓</span>
-                            <span>TV a cabo</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 mr-2">✓</span>
-                            <span>Acesso à internet</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 mr-2">✓</span>
-                            <span>Ar-condicionado</span>
-                        </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 mr-2">✓</span>
-                            <span>Café da manhã incluso</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Regras Importantes -->
-                <div class="bg-red-900/40 rounded-2xl p-6 border border-red-700/50 shadow-2xl md:col-span-2">
-                    <div class="flex items-center mb-4">
-                        <div class="text-4xl mr-4">⚠️</div>
-                        <h2 class="text-2xl font-semibold text-white">Regras Importantes</h2>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <!-- Proibido Fumar -->
-                        <div class="bg-red-800/30 rounded-lg p-4 border border-red-600/30">
-                            <div class="flex items-center mb-2">
-                                <span class="text-red-400 mr-2 text-xl">🚭</span>
-                                <h3 class="text-lg font-semibold text-white">PROIBIDO FUMAR NOS QUARTOS</h3>
-                            </div>
-                            <p class="text-red-200 text-sm leading-relaxed">
-                                Conforme Lei Federal nº 12.546/2011 e Lei Estadual, é <strong>PROIBIDO FUMAR</strong> em ambientes fechados de uso coletivo. 
-                                O descumprimento desta norma sujeita o infrator às penalidades previstas em lei.
-                            </p>
-                        </div>
-
-                        <!-- Cuidado com Toalhas -->
-                        <div class="bg-yellow-800/30 rounded-lg p-4 border border-yellow-600/30">
-                            <div class="flex items-center mb-2">
-                                <span class="text-yellow-400 mr-2 text-xl">🧻</span>
-                                <h3 class="text-lg font-semibold text-white">CUIDADO COM AS TOALHAS</h3>
-                            </div>
-                            <p class="text-yellow-200 text-sm leading-relaxed">
-                                É <strong>PROIBIDO</strong> limpar nas toalhas qualquer tipo de substância que possa manchá-las 
-                                (maquiagem, tinta, graxa, etc.). O dano às toalhas está <strong>SUJEITO À MULTA</strong> 
-                                conforme valor de reposição do item.
-                            </p>
-                        </div>
-                    </div>
+                
+                <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-radius: 16px; border: 2px dashed #ff9800;">
+                    <p style="color: #e65100; font-weight: 600; font-size: 1.1rem; margin: 0;">
+                        💡 <strong>Importante:</strong> O cumprimento dessas regras garante o conforto de todos os hóspedes!
+                    </p>
                 </div>
             </div>
+        </div>
 
-            <!-- Footer -->
-            <div class="text-center mt-8 pt-6 border-t border-white/20">
-                <p class="text-white/70 text-lg">
-                    Tenha uma excelente estadia! 🌟
-                </p>
-                <p class="text-white/50 text-sm mt-2">
-                    Para qualquer dúvida, nossa equipe está sempre à disposição.
+        <!-- Footer -->
+        <footer class="text-center mt-8 text-white opacity-90" style="padding: 3rem 1rem;">
+            <p style="font-size: 1.25rem; margin-bottom: 0.5rem;">Desejamos uma excelente estadia! 🌟</p>
+            <p style="font-size: 0.9rem;">Em caso de dúvidas, nossa equipe está sempre à disposição.</p>
+        </footer>
+    </div>
+
+    <!-- Modal for Breakfast Details -->
+    <div id="breakfastModal" class="modal">
+        <div class="modal-content">
+            <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem;">Café da Manhã - Detalhes</h3>
+            <div style="margin-bottom: 1.5rem;">
+                <div style="background: #fff3e0; padding: 1.5rem; border-radius: 16px; margin-bottom: 1rem;">
+                    <h4 style="font-weight: 700; color: #e65100; margin-bottom: 1rem;">⏰ Horários de Funcionamento</h4>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">• Segunda a Sexta: <strong>06:00h às 09:00h</strong></p>
+                    <p style="font-size: 0.9rem;">• Sábados, Domingos e Feriados: <strong>06:00h às 10:00h</strong></p>
+                </div>
+                <p style="color: #333; line-height: 1.6;">
+                    Desfrute da variedade do nosso café da manhã, composto por <strong>mais de 35 opções</strong> de proteínas, bolos, doces e cereais. Uma explosão de sabores para começar o dia com energia! 🍳🥐☕
                 </p>
             </div>
+            <button onclick="closeBreakfastModal()" class="gradient-btn" style="width: 100%;">
+                Fechar
+            </button>
         </div>
     </div>
 
-    <script>
-
-
-        // Função para copiar senha do WiFi
-        function copyWifi() {
-            navigator.clipboard.writeText('viphotel').then(() => {
-                // Feedback visual
-                const button = event.target;
-                const originalText = button.innerHTML;
-                button.innerHTML = '✓ Copiado!';
-                button.classList.add('bg-green-500');
-                button.classList.remove('bg-cyan-600');
-                
-                setTimeout(() => {
-                    button.innerHTML = originalText;
-                    button.classList.remove('bg-green-500');
-                    button.classList.add('bg-cyan-600');
-                }, 2000);
-            });
+    <script type='text/javascript'>
+        function showBreakfastDetails() {
+            const modal = document.getElementById('breakfastModal');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
         }
 
+        function closeBreakfastModal() {
+            const modal = document.getElementById('breakfastModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
 
+        function copyWifiPassword() {
+            const password = 'viphotel';
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(password).then(() => {
+                    showNotification('✅ Senha copiada!');
+                }).catch(() => {
+                    fallbackCopy(password);
+                });
+            } else {
+                fallbackCopy(password);
+            }
+        }
 
-        // Animação de entrada escalonada
-        document.addEventListener('DOMContentLoaded', () => {
-            const elements = document.querySelectorAll('.slide-in');
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showNotification('✅ Senha copiada!');
+            } catch (err) {
+                showNotification('Senha do WiFi: ' + text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 50px;
+                font-weight: 600;
+                z-index: 10000;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+            setTimeout(() => {
+                notification.style.transform = 'translateX(400px)';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        function callReception() {
+            showNotification('📞 Disque 200 no telefone do quarto para falar com a recepção!');
+        }
+
+        function goToRestaurant() {
+            window.open('https://zerotofamesites.github.io/cardapioinv-/', '_blank');
+        }
+
+        function goToUrbanoNorte() {
+            window.open('https://urbanonortecidades.com.br/', '_blank');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('breakfastModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeBreakfastModal();
+            }
+        });
+
+        // Initialize animations on load
+        window.addEventListener('load', () => {
+            const elements = document.querySelectorAll('.fade-in');
             elements.forEach((el, index) => {
-                el.style.animationDelay = `${index * 0.2}s`;
+                el.style.animationDelay = (index * 0.1) + 's';
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97d19bace014f632',t:'MTc1NzUzNTQzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97eeba94b7c8f63f',t:'MTc1Nzg0MDc5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
